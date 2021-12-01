@@ -13,6 +13,7 @@ const data = @embedFile("../data/day01.txt");
 
 pub fn main() !void {
     const values = [_]i32{
+        191,
         185,
         188,
         189,
@@ -2013,14 +2014,20 @@ pub fn main() !void {
         10525,
         10526,
     };
-    var comparison: i32 = 191;
-    var increased: i32 = 0;
+    var comparison:i32 = 0;
+    var increased: i32 = -1;
+    const stop = values.len - 3;
+    var index: usize = 0;
 
-    for (values) |value| {
-        if (value > comparison) {
+    print("Comparison: {}\n", .{comparison});
+
+    while (index <= stop) {
+        const sum = values[index] + values[index + 1] + values[index + 2];
+        if (sum > comparison) {
             increased += 1;
         }
-        comparison = value;
+        comparison = sum;
+        index += 1;
     }
 
     print("Result: {}", .{increased});
